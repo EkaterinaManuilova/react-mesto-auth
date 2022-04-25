@@ -1,4 +1,8 @@
 import React, {useState, useEffect, useCallback} from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Login from './Login';
+import Register from './Register';
+import ProtectedRoute from './ProtectedRoute';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -21,6 +25,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState({});
     const [cards, setCards] = React.useState([]);
     const [cardSelectedForDelete, setCardSelectedForDelete] = React.useState({});
+    const [loggedIn, setLoggedIn] = React.useState(false);
 
     React.useEffect(() => {
         Promise.all([api.getProfile(), api.getInitialCards()])
@@ -159,16 +164,32 @@ function App() {
 
                 <Header />
 
-                <Main
-                    onEditAvatar={handleEditAvatarClick}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onConfirmDelete={handleConfirmDeleteClick}
-                    onCardClick={handleCardClick}
-                    cards={cards}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
-                />
+                <Switch>
+                    <Route path="/sign-up">
+                        <Register  />
+                    </Route>
+                    <Route path="/sign-in">
+                        <Login />
+                    </Route>
+                    <ProtectedRoute
+                        exact path="/"
+                        loggedIn={ loggedIn}
+                        component = {<Main
+                            onEditAvatar={handleEditAvatarClick}
+                            onEditProfile={handleEditProfileClick}
+                            onAddPlace={handleAddPlaceClick}
+                            onConfirmDelete={handleConfirmDeleteClick}
+                            onCardClick={handleCardClick}
+                            cards={cards}
+                            onCardLike={handleCardLike}
+                            onCardDelete={handleCardDelete}
+                        />}
+                    />
+                    <Route>
+                        {loggedIn ? (<Redirect to="/" />) : (<Redirect to="/sing-in" />)}
+                    </Route>
+                </Switch>
+
 
                 <Footer />
 
