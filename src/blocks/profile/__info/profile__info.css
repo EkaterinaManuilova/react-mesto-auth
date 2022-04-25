@@ -1,0 +1,31 @@
+.profile__info {
+    display: grid;
+    grid-template-columns: 150px 312px 24px 1fr;
+    grid-template-rows: 70px 1fr;
+    grid-template-areas:
+    "avatar username  editbutton addbutton"
+    "avatar userjob editbutton addbutton";
+}
+@media screen and (max-width:1024px) {
+    .profile__info {
+        grid-template-columns: 150px  250px  20px 1fr;
+    }
+}
+
+@media screen and (max-width:820px) {
+    .profile__info {
+        grid-template-columns: 150px 230px 20px 1fr;
+    }
+}
+
+@media screen and (max-width:760px) {
+    .profile__info {
+        grid-template-columns: 1fr 189px 1fr;
+        grid-template-rows: 120px 1fr 1fr 50px;
+        grid-template-areas:
+        "avatar avatar avatar"
+        ". username editbutton"
+        "userjob userjob userjob"
+        "addbutton  addbutton addbutton";
+    }
+}
