@@ -153,7 +153,7 @@ function App() {
         return () => {
             document.removeEventListener("keydown", escCloseFunction, false);
         };
-    }, []);
+    }, [escCloseFunction]);
 
     const overlayCloseFunction = useCallback((event) => {
         if (event.target.classList.contains('popup_opened')) {
@@ -166,7 +166,7 @@ function App() {
         return () => {
             document.removeEventListener("mousedown", overlayCloseFunction, false);
         };
-    }, []);
+    }, [overlayCloseFunction]);
 
     function handleRegister (email, password) {
         auth.register(email, password)
@@ -216,7 +216,7 @@ function App() {
         if (token) {
             handleTokenCheck()
         }
-    }, [])
+    })
 
     function  handleLogOut() {
         localStorage.removeItem('jwt');
