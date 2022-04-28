@@ -6,11 +6,11 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-      <BrowserRouter>
+    <BrowserRouter>
+        <React.StrictMode>
           <App />
-      </BrowserRouter>
-  </React.StrictMode>,
+        </React.StrictMode>
+    </BrowserRouter>,
   document.getElementById('root')
 );
 

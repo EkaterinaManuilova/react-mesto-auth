@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Register({onRegister}) {
+
    const [email, setEmail] = React.useState('');
    const [password, setPassword] = React.useState('');
 
@@ -17,15 +18,17 @@ function Register({onRegister}) {
    }
 
    return (
-       <form className="form" onSubmit={handleSubmit}>
-          <h2 className="form__title">Регистрация</h2>
-          <input type="email" className="form__input" value={email} onChange={handleEmailChange}
-                 placeholder="Email" required />
-          <input type="password" className="form__input" value={password} onChange={handlePasswordChange}
-                 placeholder={password} required />
-          <button type="submit" className="form__button">Зарегистрироваться</button>
-           <p className="form__text"><Link className="form__link" to="/sign-in">Уже зарегистрированы? Войти</Link></p>
+       <div className="identification">
+           <form className="auth-form auth-form_type_register" noValidate onSubmit={handleSubmit}>
+               <h2 className="auth-form__title">Регистрация</h2>
+                <input type="email" className="auth-form__input" value={email || ''} onChange={handleEmailChange}
+                       placeholder="Email" autoComplete="off" required />
+                <input type="password" className="auth-form__input" value={password || ''} onChange={handlePasswordChange}
+                        placeholder="Пароль" autoComplete="off" required />
+                <button type="submit" className="auth-form__button">Зарегистрироваться</button>
+                <Link className="auth-form__link" to="/sign-in">Уже зарегистрированы? Войти</Link>
           </form>
+       </div>
    )
 }
 

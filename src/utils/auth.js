@@ -1,5 +1,3 @@
-import api from "./api";
-
 class Auth {
     constructor(options) {
         this._baseUrl = options.baseUrl;
@@ -13,24 +11,24 @@ class Auth {
         return res.json();
     }
 
-    register(data) {
+    register(email, password) {
         return fetch(`${this._baseUrl}/signup`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
-                email: data.email,
-                password: data.password
+                email: email,
+                password: password
             })
         })
             .then(this._getResponseData)
     }
-    authorize(data) {
+    authorize(email, password) {
         return fetch(`${this._baseUrl}/signin`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
-                email: data.email,
-                password: data.password
+                email: email,
+                password: password
             })
         })
             .then(this._getResponseData)
@@ -41,7 +39,7 @@ class Auth {
             method: 'GET',
             headers: {
                 ...this._headers,
-                Authorization: `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             }
         })
             .then(this._getResponseData)
@@ -50,7 +48,7 @@ class Auth {
 
 const auth = new Auth ({
     baseUrl: 'https://auth.nomoreparties.co',
-    'Content-Type': 'application/json'
+    headers: {'Content-Type': 'application/json'}
 });
 
 export default auth;

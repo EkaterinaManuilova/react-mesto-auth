@@ -16,14 +16,16 @@ function Login({onLogin}) {
     }
 
     return (
-        <form className="form" onSubmit={handleSubmit}>
-            <h2 className="form__title">Вход</h2>
-            <input type="email" className="form__input" value={email} onChange={handleEmailChange}
-                   placeholder="Email" required />
-            <input type="password" className="form__input" value={password} onChange={handlePasswordChange}
-                   placeholder={password} required />
-            <button type="submit" className="form__button">Войти</button>
-        </form>
+        <div className="identification">
+            <form className="auth-form auth-form_type_login" noValidate onSubmit={handleSubmit}>
+                <h2 className="auth-form__title">Вход</h2>
+                <input type="email" className="auth-form__input" value={email || ''} onChange={handleEmailChange}
+                       placeholder="Email" required />
+                <input type="password" className="auth-form__input" value={password || ''} onChange={handlePasswordChange}
+                       placeholder="Пароль" required />
+                <button type="submit" className="auth-form__button">Войти</button>
+            </form>
+        </div>
     )
 }
 
