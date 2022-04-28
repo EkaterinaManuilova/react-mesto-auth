@@ -12,6 +12,9 @@ function Login({onLogin}) {
     }
     function handleSubmit(event) {
         event.preventDefault();
+        if (!email || !password) {
+            return
+        }
         onLogin(email, password);
     }
 

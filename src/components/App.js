@@ -168,6 +168,18 @@ function App() {
         };
     }, [overlayCloseFunction]);
 
+    useEffect(() =>  {
+        if (loggedIn) {
+            history.push('/');
+            return
+        }
+        history.push('sign-in');
+    }, [history, loggedIn])
+
+    useEffect(() => {
+        handleTokenCheck()
+    }, [])
+
     function handleRegister (email, password) {
         auth.register(email, password)
             .then(() => {
@@ -189,7 +201,6 @@ function App() {
                     localStorage.setItem('jwt', data.token);
                     setLoggedIn(true);
                     handleTokenCheck();
-                    history.push('/');
                     }
                 }
             )
@@ -203,7 +214,6 @@ function App() {
                 .then((res) => {
                     if (res) {
                         setLoggedIn(true);
-                        history.push('/');
                     }
                     setEmailAuthorized(res.data.email);
                 })
@@ -211,16 +221,8 @@ function App() {
         }
     }
 
-    useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        if (token) {
-            handleTokenCheck()
-        }
-    })
-
     function  handleLogOut() {
         localStorage.removeItem('jwt');
-        history.push('/sign-in');
         setLoggedIn(false);
     }
 

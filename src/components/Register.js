@@ -14,6 +14,9 @@ function Register({onRegister}) {
    }
    function handleSubmit(event) {
       event.preventDefault();
+       if (!email || !password) {
+           return
+       }
       onRegister(email, password);
    }
 
