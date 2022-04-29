@@ -1,48 +1,75 @@
-import React from 'react';
-import  {useLocation, Link} from 'react-router-dom';
-import logo from '../images/mesto.svg';
+import React from "react";
+import { useLocation, Link } from "react-router-dom";
+import logo from "../images/mesto.svg";
 
-function Header({loggedIn, emailAuthorized, onLogOut}) {
-    const location = useLocation();
-    const [isNavOpen, setIsNavOpen] = React.useState(false);
+function Header({ loggedIn, emailAuthorized, onLogOut }) {
+  const location = useLocation();
+  const [isNavOpen, setIsNavOpen] = React.useState(false);
 
-    function handleOpenNav() {
-        setIsNavOpen(!isNavOpen);
-    }
+  function handleOpenNav() {
+    setIsNavOpen(!isNavOpen);
+  }
 
-    function handleOnLogOut() {
-        setIsNavOpen(false);
-        onLogOut();
-    }
+  function handleOnLogOut() {
+    setIsNavOpen(false);
+    onLogOut();
+  }
 
-    return (
-        <header className={loggedIn ? 'header header_mobile' : 'header header_logout'}>
-            {loggedIn &&
-                (
-                    <div className={isNavOpen ? 'header__container header__container_visible' : 'header__container'}>
-                        <p className="header__email">{loggedIn ? emailAuthorized : ''}</p>
-                        <button type="button" className="header__button" onClick={handleOnLogOut}>Выйти</button>
-                    </div>
-                )
+  return (
+    <header
+      className={loggedIn ? "header header_mobile" : "header header_logout"}
+    >
+      {loggedIn && (
+        <div
+          className={
+            isNavOpen
+              ? "header__container header__container_visible"
+              : "header__container"
+          }
+        >
+          <p className="header__email">{loggedIn ? emailAuthorized : ""}</p>
+          <button
+            type="button"
+            className="header__button"
+            onClick={handleOnLogOut}
+          >
+            Выйти
+          </button>
+        </div>
+      )}
+      <div
+        className={
+          loggedIn
+            ? "header__main-content"
+            : "header__main-content header__main-content_logout"
+        }
+      >
+        <img src={logo} alt="Место" className="header__logo" />
+        {loggedIn ? (
+          <button
+            type="button"
+            className={
+              isNavOpen ? "header__close-nav" : "header__burger-button"
             }
-            <div className={loggedIn ? 'header__main-content' : 'header__main-content header__main-content_logout'}>
-                <img src={logo} alt="Место" className="header__logo" />
-                {loggedIn ?
-                    (
-                        <button type="button"
-                                className={isNavOpen ? 'header__close-nav' : 'header__burger-button'}
-                                onClick={handleOpenNav} />
-                    )
-                :
-                    (
-                        <nav>
-                            {(location.pathname === '/sign-in') && <Link className="header__link" to={'/sign-up'}>Регистрация</Link>}
-                            {(location.pathname === '/sign-up') && <Link className="header__link" to={'/sign-in'}>Войти</Link>}
-                        </nav>
-                    )}
-            </div>
-        </header>
-    )
+            onClick={handleOpenNav}
+          />
+        ) : (
+          <nav>
+            {location.pathname === "/sign-in" && (
+              <Link className="header__link" to={"/sign-up"}>
+                Регистрация
+              </Link>
+            )}
+            {location.pathname === "/sign-up" && (
+              <Link className="header__link" to={"/sign-in"}>
+                Войти
+              </Link>
+            )}
+          </nav>
+        )}
+      </div>
+    </header>
+  );
 }
 
 export default Header;
