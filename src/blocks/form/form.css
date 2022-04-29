@@ -1,9 +1,9 @@
 .form {
-    margin: auto;
+  margin: auto;
 }
 
- @media screen and (max-width:760px){
-    .form {
-        margin: 75px auto auto;
-    }
+@media screen and (max-width: 760px) {
+  .form {
+    margin: 75px auto auto;
+  }
 }

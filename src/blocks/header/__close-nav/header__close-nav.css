@@ -1,18 +1,18 @@
-.header__burger-button {
-  display: flex;
+.header__close-nav {
   visibility: hidden;
+  display: flex;
 }
 
 @media screen and (max-width: 760px) {
-  .header__burger-button {
+  .header__close-nav {
     visibility: visible;
-    width: 24px;
-    height: 28px;
+    background-image: url("../../../images/CloseIcon.svg");
+    width: 20px;
+    height: 20px;
     background-color: transparent;
     border: none;
     padding: 0;
     cursor: pointer;
-    background-image: url("../../../images/Burger.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -20,7 +20,7 @@
   }
 }
 
-.header__burger-button:hover {
+.header__close-nav:hover {
   opacity: 0.6;
   transition: opacity linear 0.3s;
 }
