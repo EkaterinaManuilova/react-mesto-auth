@@ -202,7 +202,7 @@ function App() {
         setIsSuccessReg(false);
       })
       .finally(() => {
-        handleInfoTooltipSetOpen()
+        handleInfoTooltipSetOpen();
       })
   }
 
