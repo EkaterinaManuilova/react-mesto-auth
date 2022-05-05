@@ -1,4 +1,6 @@
 import React from "react";
+import Popup from "./Popup";
+import Form from "./Form";
 
 function PopupWithForm({
   name,
@@ -12,16 +14,12 @@ function PopupWithForm({
   loadingTextBtn,
 }) {
   return (
-    <div className={`popup popup_type_${name} ${isOpen && "popup_opened"}`}>
-      <div className="popup__container">
-        <button
-          type="button"
-          className="button button_type_close"
-          onClick={onClose}
-        />
+    <Popup isOpen={isOpen} name={name} onClose={onClose}>
+      <div className="popup__form-container">
         <h2 className="popup__title">{title}</h2>
-        <form
-          className="form form_type_edit"
+        <Form name={name} onSubmit={onSubmit} isLoading={isLoading} textBtn={textBtn} loadingTextBtn={loadingTextBtn} >{children}</Form>
+        {/* <form
+          className="form"
           name={`${name}Form`}
           onSubmit={onSubmit}
         >
@@ -29,9 +27,9 @@ function PopupWithForm({
           <button type="submit" className="button button_type_submit">
             {isLoading ? loadingTextBtn : textBtn}
           </button>
-        </form>
+        </form> */}
       </div>
-    </div>
+    </Popup>
   );
 }
 

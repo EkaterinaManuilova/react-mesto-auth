@@ -20,6 +20,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] =
     useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
@@ -67,6 +68,7 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card);
+    setIsImagePopupOpen(!isImagePopupOpen);
   }
 
   function handleInfoTooltipSetOpen() {
@@ -147,36 +149,37 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsConfirmDeletePopupOpen(false);
+    setIsImagePopupOpen(false);
     setIsInfoTooltipOpen(false);
     setSelectedCard({});
     setCardSelectedForDelete({});
   }
 
-  const escCloseFunction = useCallback((event) => {
-    if (event.key === "Escape") {
-      closeAllPopups();
-    }
-  }, []);
+  // const escCloseFunction = useCallback((event) => {
+  //   if (event.key === "Escape") {
+  //     closeAllPopups();
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    document.addEventListener("keydown", escCloseFunction, false);
-    return () => {
-      document.removeEventListener("keydown", escCloseFunction, false);
-    };
-  }, [escCloseFunction]);
+  // useEffect(() => {
+  //   document.addEventListener("keydown", escCloseFunction, false);
+  //   return () => {
+  //     document.removeEventListener("keydown", escCloseFunction, false);
+  //   };
+  // }, [escCloseFunction]);
 
-  const overlayCloseFunction = useCallback((event) => {
-    if (event.target.classList.contains("popup_opened")) {
-      closeAllPopups();
-    }
-  }, []);
+  // const overlayCloseFunction = useCallback((event) => {
+  //   if (event.target.classList.contains("popup_opened")) {
+  //     closeAllPopups();
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    document.addEventListener("mousedown", overlayCloseFunction, false);
-    return () => {
-      document.removeEventListener("mousedown", overlayCloseFunction, false);
-    };
-  }, [overlayCloseFunction]);
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", overlayCloseFunction, false);
+  //   return () => {
+  //     document.removeEventListener("mousedown", overlayCloseFunction, false);
+  //   };
+  // }, [overlayCloseFunction]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -203,7 +206,7 @@ function App() {
       })
       .finally(() => {
         handleInfoTooltipSetOpen();
-      })
+      });
   }
 
   function handleAuthorize(email, password) {
@@ -276,7 +279,11 @@ function App() {
 
         <Footer loggedIn={loggedIn} />
 
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <ImagePopup
+          card={selectedCard}
+          onClose={closeAllPopups}
+          isOpen={isImagePopupOpen}
+        />
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}

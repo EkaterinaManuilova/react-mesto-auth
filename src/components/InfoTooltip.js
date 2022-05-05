@@ -1,16 +1,13 @@
 import React from "react";
+import Popup from "./Popup";
+import PopupWithForm from "./PopupWithForm";
 import success from "../images/Success.svg";
 import fail from "../images/Fail.svg";
 
 function InfoTooltip({ isOpen, onClose, isSuccessReg }) {
   return (
-    <div className={`popup popup_type_info ${isOpen && "popup_opened"}`}>
-      <div className="popup__container">
-        <button
-          type="button"
-          className="button button_type_close"
-          onClick={onClose}
-        />
+    <Popup isOpen={isOpen} name="info" onClose={onClose}>
+      <div className="popup__form-container">
         <img
           className="popup__registration-image"
           src={isSuccessReg ? success : fail}
@@ -22,7 +19,7 @@ function InfoTooltip({ isOpen, onClose, isSuccessReg }) {
             : "Что-то пошло не так!" + "Попробуйте ещё раз."}
         </p>
       </div>
-    </div>
+    </Popup>
   );
 }
 export default InfoTooltip;
